@@ -13,6 +13,9 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppPlannerRouteImport } from './routes/app.planner'
+import { Route as AppMeetingsRouteImport } from './routes/app.meetings'
+import { Route as AppEmailRouteImport } from './routes/app.email'
 import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
@@ -36,6 +39,21 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPlannerRoute = AppPlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMeetingsRoute = AppMeetingsRouteImport.update({
+  id: '/meetings',
+  path: '/meetings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEmailRoute = AppEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => AppRoute,
+} as any)
 const ApiGenerateRoute = ApiGenerateRouteImport.update({
   id: '/api/generate',
   path: '/api/generate',
@@ -53,6 +71,9 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
+  '/app/email': typeof AppEmailRoute
+  '/app/meetings': typeof AppMeetingsRoute
+  '/app/planner': typeof AppPlannerRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +81,9 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
+  '/app/email': typeof AppEmailRoute
+  '/app/meetings': typeof AppMeetingsRoute
+  '/app/planner': typeof AppPlannerRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
@@ -69,13 +93,33 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/api/chat': typeof ApiChatRoute
   '/api/generate': typeof ApiGenerateRoute
+  '/app/email': typeof AppEmailRoute
+  '/app/meetings': typeof AppMeetingsRoute
+  '/app/planner': typeof AppPlannerRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/auth' | '/api/chat' | '/api/generate' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/api/chat'
+    | '/api/generate'
+    | '/app/email'
+    | '/app/meetings'
+    | '/app/planner'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/api/chat' | '/api/generate' | '/app'
+  to:
+    | '/'
+    | '/auth'
+    | '/api/chat'
+    | '/api/generate'
+    | '/app/email'
+    | '/app/meetings'
+    | '/app/planner'
+    | '/app'
   id:
     | '__root__'
     | '/'
@@ -83,6 +127,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/api/chat'
     | '/api/generate'
+    | '/app/email'
+    | '/app/meetings'
+    | '/app/planner'
     | '/app/'
   fileRoutesById: FileRoutesById
 }
@@ -124,6 +171,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/planner': {
+      id: '/app/planner'
+      path: '/planner'
+      fullPath: '/app/planner'
+      preLoaderRoute: typeof AppPlannerRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/meetings': {
+      id: '/app/meetings'
+      path: '/meetings'
+      fullPath: '/app/meetings'
+      preLoaderRoute: typeof AppMeetingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/email': {
+      id: '/app/email'
+      path: '/email'
+      fullPath: '/app/email'
+      preLoaderRoute: typeof AppEmailRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/api/generate': {
       id: '/api/generate'
       path: '/api/generate'
@@ -142,10 +210,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppEmailRoute: typeof AppEmailRoute
+  AppMeetingsRoute: typeof AppMeetingsRoute
+  AppPlannerRoute: typeof AppPlannerRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppEmailRoute: AppEmailRoute,
+  AppMeetingsRoute: AppMeetingsRoute,
+  AppPlannerRoute: AppPlannerRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
