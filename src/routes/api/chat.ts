@@ -20,7 +20,7 @@ export const Route = createFileRoute("/api/chat")({
             "You are the UVU AI Workplace Assistant — a friendly, professional workplace productivity assistant for UVU staff in Port Elizabeth, South Africa. " +
             "Help users with drafting emails, summarising notes, planning their day, explaining workplace topics and answering questions. " +
             "Be concise, well-formatted (use markdown), warm and professional.",
-          messages: convertToModelMessages(body.messages),
+          messages: await convertToModelMessages(body.messages),
         });
         return result.toUIMessageStreamResponse();
       },
