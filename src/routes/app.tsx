@@ -46,7 +46,7 @@ export const Route = createFileRoute("/app")({
   component: AppLayout,
 });
 
-const navItems = [
+const navItems: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/app/email", label: "Email Generator", icon: Mail },
   { to: "/app/meetings", label: "Meeting Notes", icon: FileText },
@@ -54,7 +54,7 @@ const navItems = [
   { to: "/app/chat", label: "AI Assistant", icon: Bot },
   { to: "/app/history", label: "History", icon: History },
   { to: "/app/settings", label: "Settings", icon: Settings },
-] as const;
+];
 
 function AppLayout() {
   const nav = useNavigate();
