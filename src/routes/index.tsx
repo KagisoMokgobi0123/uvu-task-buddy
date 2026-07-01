@@ -99,11 +99,12 @@ function Landing() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-              <Link to="/auth">Sign in</Link>
+              <Link to="/auth" search={{ mode: "signin" }}>Sign in</Link>
             </Button>
             <Button asChild size="sm" className="bg-gradient-brand text-primary-foreground shadow-glow">
-              <Link to="/auth">Get Started</Link>
+              <Link to="/auth" search={{ mode: "signup" }}>Get Started</Link>
             </Button>
+
           </div>
         </div>
       </header>
