@@ -99,11 +99,12 @@ function Landing() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-              <Link to="/auth">Sign in</Link>
+              <Link to="/auth" search={{ mode: "signin" }}>Sign in</Link>
             </Button>
             <Button asChild size="sm" className="bg-gradient-brand text-primary-foreground shadow-glow">
-              <Link to="/auth">Get Started</Link>
+              <Link to="/auth" search={{ mode: "signup" }}>Get Started</Link>
             </Button>
+
           </div>
         </div>
       </header>
@@ -127,10 +128,11 @@ function Landing() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-brand text-primary-foreground shadow-glow">
-                <Link to="/auth">
+                <Link to="/auth" search={{ mode: "signup" }}>
                   Get Started <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
               </Button>
+
               <Button asChild size="lg" variant="outline">
                 <a href="#features">Learn More</a>
               </Button>
@@ -269,10 +271,11 @@ function Landing() {
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" variant="secondary">
-              <Link to="/auth">
+              <Link to="/auth" search={{ mode: "signup" }}>
                 Get Started <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
+
           </div>
         </div>
       </section>
