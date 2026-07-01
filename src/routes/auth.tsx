@@ -1,12 +1,14 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { registerUser, signInUser } from "@/lib/storage";
 import { BrandLockup } from "@/components/brand";
 import hero from "@/assets/hero.jpg";
@@ -126,18 +128,15 @@ function SignInForm({ onDone, switchToSignUp }: { onDone: () => void; switchToSi
             required
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="si-password">Password</Label>
-          <Input
-            id="si-password"
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-          />
-        </div>
+        <PasswordField
+          id="si-password"
+          label="Password"
+          value={password}
+          onChange={setPassword}
+          placeholder="••••••••"
+          autoComplete="current-password"
+        />
+
         <Button
           type="submit"
           disabled={loading}
@@ -212,30 +211,23 @@ function SignUpForm({ onDone, switchToSignIn }: { onDone: () => void; switchToSi
             required
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="su-password">Password</Label>
-          <Input
-            id="su-password"
-            type="password"
-            placeholder="At least 8 characters"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="su-confirm">Confirm password</Label>
-          <Input
-            id="su-confirm"
-            type="password"
-            placeholder="Re-enter password"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-        </div>
+        <PasswordField
+          id="su-password"
+          label="Password"
+          value={password}
+          onChange={setPassword}
+          placeholder="At least 8 characters"
+          autoComplete="new-password"
+        />
+        <PasswordField
+          id="su-confirm"
+          label="Confirm password"
+          value={confirm}
+          onChange={setConfirm}
+          placeholder="Re-enter password"
+          autoComplete="new-password"
+        />
+
         <label className="flex items-start gap-2 text-sm text-muted-foreground">
           <Checkbox
             checked={terms}
@@ -265,3 +257,49 @@ function SignUpForm({ onDone, switchToSignIn }: { onDone: () => void; switchToSi
     </>
   );
 }
+
+function PasswordField({
+  id,
+  label,
+  value,
+  onChange,
+  placeholder,
+  autoComplete,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  autoComplete?: string;
+}) {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={id}>{label}</Label>
+      <div className="relative">
+        <Input
+          id={id}
+          type={show ? "text" : "password"}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          autoComplete={autoComplete}
+          required
+          className="pr-10"
+        />
+        <button
+          type="button"
+          onClick={() => setShow((s) => !s)}
+          aria-label={show ? "Hide password" : "Show password"}
+          aria-pressed={show}
+          className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-r-md"
+          tabIndex={-1}
+        >
+          {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
