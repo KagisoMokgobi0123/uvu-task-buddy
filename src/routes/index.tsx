@@ -271,10 +271,11 @@ function Landing() {
           </p>
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" variant="secondary">
-              <Link to="/auth">
+              <Link to="/auth" search={{ mode: "signup" }}>
                 Get Started <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
+
           </div>
         </div>
       </section>
