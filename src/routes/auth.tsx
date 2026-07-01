@@ -211,30 +211,23 @@ function SignUpForm({ onDone, switchToSignIn }: { onDone: () => void; switchToSi
             required
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="su-password">Password</Label>
-          <Input
-            id="su-password"
-            type="password"
-            placeholder="At least 8 characters"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="su-confirm">Confirm password</Label>
-          <Input
-            id="su-confirm"
-            type="password"
-            placeholder="Re-enter password"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            autoComplete="new-password"
-            required
-          />
-        </div>
+        <PasswordField
+          id="su-password"
+          label="Password"
+          value={password}
+          onChange={setPassword}
+          placeholder="At least 8 characters"
+          autoComplete="new-password"
+        />
+        <PasswordField
+          id="su-confirm"
+          label="Confirm password"
+          value={confirm}
+          onChange={setConfirm}
+          placeholder="Re-enter password"
+          autoComplete="new-password"
+        />
+
         <label className="flex items-start gap-2 text-sm text-muted-foreground">
           <Checkbox
             checked={terms}
