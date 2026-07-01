@@ -128,10 +128,11 @@ function Landing() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-brand text-primary-foreground shadow-glow">
-                <Link to="/auth">
+                <Link to="/auth" search={{ mode: "signup" }}>
                   Get Started <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
               </Button>
+
               <Button asChild size="lg" variant="outline">
                 <a href="#features">Learn More</a>
               </Button>
