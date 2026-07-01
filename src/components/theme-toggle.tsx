@@ -27,11 +27,12 @@ export function useTheme() {
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
+    mounted &&
+    (theme === "dark" ||
+      (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches));
   return (
     <Button
       variant="ghost"
@@ -39,7 +40,12 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {mounted ? (
+        isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />
+      ) : (
+        <Sun className="h-4 w-4 opacity-0" aria-hidden />
+      )}
     </Button>
   );
 }
+
