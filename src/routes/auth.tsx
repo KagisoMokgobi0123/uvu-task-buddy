@@ -128,18 +128,15 @@ function SignInForm({ onDone, switchToSignUp }: { onDone: () => void; switchToSi
             required
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="si-password">Password</Label>
-          <Input
-            id="si-password"
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-          />
-        </div>
+        <PasswordField
+          id="si-password"
+          label="Password"
+          value={password}
+          onChange={setPassword}
+          placeholder="••••••••"
+          autoComplete="current-password"
+        />
+
         <Button
           type="submit"
           disabled={loading}
